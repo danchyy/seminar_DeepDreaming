@@ -7,3 +7,11 @@ Glavno "oružje" dubokog učenja su umjetne neuronske mreže, koje se savršeno 
 U slučaju slika, razni slojevi odrađuju različit posao te na taj način simuliraju postupak ekstrakcije značajki kod konvencionalnih metoda strojnog učenja. Na primjer, prvih nekoliko slojeva neke neuronske mreže prepoznaju pozicije nekih rubova i njihov raspored, neki dublji slojevi mogu slagati te prethodne značajke te na taj način napraviti detekciju objekata.
 
 Upravo u tim nelinarnim jedinicama je najveća prednost dubokog učenja, sama činjenica što se značajke i veze između njih pronalaze kroz skrivene slojeve, to uklanja puno posla prije samog odabira modela kojim će se klasificirati neka slika (na primjer). Te metode su dokazale da su trenutno najbolje u nekim područjima, a jedno od područja u kojem su metode dubokog učenja najizraženije jest računalni vid. Na najvećem natjecanju u području računalnog vida ImageNet, upravo modeli dubokih neuronskih mreža su zabilježili najbolje rezultate (REFERENCA)
+
+Najčešći oblik strojnog (ujedno i dubokog) učenja jest nadgledano učenje. Ono funkcionira na način da postoji skup označenih podataka nad kojim se trenira model. Model unutar svojih jedinica ima težine koje se namještaju ovisno o ulaznom podatku i njegovoj oznaci. Postupak kojim se to ostvaruje zove se stohastički gradijentni spust.
+
+Problem je što su te jedinice unutar skrivenih slojeva kod standardnih metoda strojnog učenja linearne te zbog toga postupak izvlačenja značajki treba biti vrlo dobar kako bi se dobio povoljan rezultat, što iziskuje puno truda i vremena. Kod arhitektura dubokog učenja višeslojni skupovi jednostavnih nelineranih jedinica omogućavaju prepoznavanje između sitnih razlika pojedinih objekata.
+
+Konvolucijske neuronske mreže
+
+- procesiraju podatke u obliku višestrukih polja, npr. slika u boji se sastoji od tri 2D polja koja sadržavaju intenzitet piksela u tri kanala boje
