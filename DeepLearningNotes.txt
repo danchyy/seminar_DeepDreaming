@@ -1,0 +1,4 @@
+
+Konvencionalne tehnike strojnog učenja su bile limitirane u procesiranju podataka u njihovom sirovom obliku (slike, tekst, ...).
+Desetljećima su se konstruirali sustavi za prepoznavanje uzoraka ili ostali sustavi za ekstrakciju značajka koji bi tada transformirali te sirove podatke u pripadnu reprezentaciju ili neki vektor značajki iz kojih bi se moglo klasificirati nešto.
+
