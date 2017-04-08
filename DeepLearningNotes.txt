@@ -15,3 +15,15 @@ Problem je što su te jedinice unutar skrivenih slojeva kod standardnih metoda s
 Konvolucijske neuronske mreže
 
 - procesiraju podatke u obliku višestrukih polja, npr. slika u boji se sastoji od tri 2D polja koja sadržavaju intenzitet piksela u tri kanala boje
+
+- Pooling sloj (Sloj udruživanja) je zadužen za spajanje semantički sličnih značajki u jednu. Tipična pooling jedinica računa maksimum lokalnih dijelova koji su pomaknuti za više od jednog stupca/retka i time smanjuju dimenzionalnost reprezentacije i stvaraju optornost na  male pomake i distorzije.
+
+- Konvolucijske neuronske mreže su poprimilie veliki rast nakon već spomenutog ImageNet natjecanja iz 2012. godine kada su duboke neuronske mreže gotovo dvostruko smanjile greške u usporedbi s ostalim pristupima (PROC ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 25)
+
+- u tome su pomogle grafičke kartice ,ReLU prijenosne funkcije, nova regularizacijska tehnika zvana dropout i sposobnost stvaranja novih primjera deformiranjem slike
+
+Budućnost dubokog učenja
+
+- Nenadgledano učenje biti će slijedeći korak u razvoju dubokog učenja, koje je do sada bilo zasjenjeno sa strane nadgledanog učenja.
+
+- Očekuje se sve veća kombinacija dubokog i podržanog (reinforcement) učenja.
