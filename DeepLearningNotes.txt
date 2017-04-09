@@ -16,7 +16,7 @@ Konvolucijske neuronske mreže
 
 - procesiraju podatke u obliku višestrukih polja, npr. slika u boji se sastoji od tri 2D polja koja sadržavaju intenzitet piksela u tri kanala boje
 
-- Pooling sloj (Sloj udruživanja) je zadužen za spajanje semantički sličnih značajki u jednu. Tipična pooling jedinica računa maksimum lokalnih dijelova koji su pomaknuti za više od jednog stupca/retka i time smanjuju dimenzionalnost reprezentacije i stvaraju optornost na  male pomake i distorzije.
+- Pooling sloj (Sloj sažimanja) je zadužen za spajanje semantički sličnih značajki u jednu. Tipična pooling jedinica računa maksimum lokalnih dijelova koji su pomaknuti za više od jednog stupca/retka i time smanjuju dimenzionalnost reprezentacije i stvaraju optornost na  male pomake i distorzije.
 
 - Konvolucijske neuronske mreže su poprimilie veliki rast nakon već spomenutog ImageNet natjecanja iz 2012. godine kada su duboke neuronske mreže gotovo dvostruko smanjile greške u usporedbi s ostalim pristupima (PROC ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 25)
 
@@ -27,3 +27,33 @@ Budućnost dubokog učenja
 - Nenadgledano učenje biti će slijedeći korak u razvoju dubokog učenja, koje je do sada bilo zasjenjeno sa strane nadgledanog učenja.
 
 - Očekuje se sve veća kombinacija dubokog i podržanog (reinforcement) učenja.
+
+Lokalna receptivna polja:
+	- svaki skriveni neuron nije spojen sa svim ulaznim pixelima, već samo dijelom piksela
+	- neki skriveni neuron može pokazivati na dijelove ulazne slike, npr. 3x3, 4x4 ili 5x5 (ili neke druge dimenzije) piksela iz ulazne slike
+	- taj dio ulazne slike se naziva lokalno receptivno polje za skriveni neuron. Taj skriveni neuron će pokušati naučiti analizirati to specifično receptivno polje
+	- na taj način skriveni sloj neće imati jednak broj neurona kao ulazni podaci, niti će biti u potpunosti povezani za svim pikselima već samo s njemu određenim poljima
+	- Takav prozor ulaznih piksela se pomiče kroz sliku i mapira na ostale skrivene neurone
+	- na taj način imamo puno manje težina i veza, odnosno puno manje parametara
+
+Dijeljene težine
+	- Za sve neurone u skrivenom sloju koriste se iste težine i pristranost (engl. bias)
+	- dimenzije težina su iste kao i dimenzije lokalnog polja na ulaznoj slici
+	- to znači da će neuroni u skrivenom sloju detektirati istu značajku, ali na drugim lokacijama na slici
+	- poanta dijeljenih težina jest ta da ako skriveni neuron detektira neke rubove na specifičnom lokalnom polju, vrlo je vjerojatno da će i neki drugi skriveni neuron htjeti detektirati rubove u svojem specifičnom lokalnom polju
+	- Drugim riječima, ako postoji slika psa te je pomaknemo u neku stranu, ili je zarotiramo to je još uvijek slika psa
+	- takva poveznica između ulaznog sloja i prvog skrivenog sloja se često naziva mapa značajki
+	- velika prednost djeljenja težina jest smanjen broj parametara. Jedna mapa značajki treba 5x5 (odnosno dimenzije lokalnog polja) + 1 parametara (pristranost)
+	- dakle za mapa značajki, to je jednako 10 x 26 = 260 parametara, za potpuno povezani prvi sloj, to bi bilo sveukupno 28 x 28 (ulazne dimenzije) x 28 (proizvoljan broj skrivenih neurona) što je puno više
+
+Sloj sažimanja (pooling layer)
+	- oni se nalaze uglavnom odmah iza konvolucijskih slojeva
+	- pojednostavjuju informacije s izlaznih slojeva konvolucijskog sloja
+	- uzimaju izlaz iz mape značajka, dakle iz prvog skrivenog sloja te sažimu informacije iz neke manje regije (npr. 2x2) u jedan neuron 
+	- učestala procedura za sažimanje jest max-pooling (na hrvatskom je to maksimalno sažimanje) koje uzima maksimalnu vrijednost iz te manje regije
+	- Sloj sažimanja rezultira još manjem broju neuronu od onog u prvom skrivenom sloju
+	STAVIT SLIKU IZ neuralnetworksanddeeplearning.com di su prikazani i konv layer i pooling layer
+	- max pooling možemo zamislit kao način na koji mreža pita je li pronađena neka značajke negdje u regiji na slici
+	- postoje ostali pristupi osim max poolinga, poput mean-pooling, koji uzima prosjek, L2 pooling, koji uzima korijen sume svih kvadrata unutar 2x2 regije na slici i slično
+
+Način optimiranja težini se vrši jednako kao i u običnim neuronskim mrežama, stohastičkim (ili grupnim) gradijentnim spustom, no ima nekoliko razlika u samom izvršavanju algoritma pošto ova mreža više nije potpuno povezana.
