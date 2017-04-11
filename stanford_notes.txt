@@ -1,0 +1,4 @@
+
+Conv net vs nearest neighbour
+	-  kNN spor na test slikama, brz na trening slikama (samo se zapamte slike)
+	- conv nets treba puno da se istrenira, ali brzo klasificira
