@@ -2,3 +2,13 @@
 Conv net vs nearest neighbour
 	-  kNN spor na test slikama, brz na trening slikama (samo se zapamte slike)
 	- conv nets treba puno da se istrenira, ali brzo klasificira
+
+Multiclass SVM loss
+	Li = Sum(max( 0, sj-sy(i) + 1 ))
+
+	sj -> druga klasa
+	sy(i) -> točna klasa za taj primjer
+
+	- tražimo čim manji loss, koji nam kazuje koliko dobro smo klasificirali primjer
+
+	L = 1 / N * sum(Li)

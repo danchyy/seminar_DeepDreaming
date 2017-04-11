@@ -1,0 +1,37 @@
+
+- srž programa Tensorflow se sastoji od komputacijskih grafova kojih se treba prvo izgraditi te nakon toga pokrenuti
+- to se koristi pomoću tensorflowih ugrađenih varijabli i atributa, poput:
+	- tf.constant koja označava konstantu
+	- tf.Variable koja označava varijablu
+	- tf.add, tf.sub, ... označava operacije
+- s prethodnim atributimase izgrađuje taj komputacijski (computational) graf koji u sebi sadrži čvorove
+	- kako bi se pokrenulo izvršavanje grafa potrebno je napraviti sjednicu
+
+Sjednica
+	- obuhvati sve dosadašnje kontrole koje su povezane s pojedinim čvorovima te izvrši naredbe spremljene u njima
+	- npr.
+		- node1 = tf.constant(3.0, tf.float32)
+		- node2 = tf.constant(4.0, tf.float32)
+		- node3 = node1 + node2 (ili tf.add(node1, node2))
+		- sess = tf.Session()
+		- sess.run(node3) -> rezultat ove naredbe jest 7
+
+Primjer stvaranja jednostavnog linearnog modela
+	- W = tf.Variable([.3], tf.float32)
+	- b = tf.Variable([-.3], tf.float32)
+	- x = tf.placeholder(tf.float32) # ovo je vrsta strukture podataka gdje ne treba dodijeliti odmah vrijednost
+	- linear_model = W * x + b 
+	- dakle ovdje smo stvorili pojedine čvorove W i b, koji nam predstavljaju težine u nekom modelu te pristranost (odnosno bias) u tom istom modelu
+	- x su neki ulazni podaci za koje računamo vrijednosti na izlazu jednostavnog linearnog modela
+	- to napravimo na sličan način kao u prvom primjeru
+
+	- init = tf.global_variables_initializer() # varijablu init je potrebno pokrenuti u sjednici kako bi se inicijalizirale sve varijable
+	- sess.run(init)
+	- sess.run(linear_model, {x:[1, 2, 3, 4]})
+	-> pošto je x tipa tf.placeholder, ovdje je bilo potrebno dodijeliti vriednosti za x
+
+tf.train
+	- omogćuava treniranje nekih modela
+
+tf.contrib.learn
+	- omogućava treniranje, evaluaciju modela, rad sa skupovima podataka i slično
