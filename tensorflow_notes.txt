@@ -28,10 +28,41 @@ Primjer stvaranja jednostavnog linearnog modela
 	- init = tf.global_variables_initializer() # varijablu init je potrebno pokrenuti u sjednici kako bi se inicijalizirale sve varijable
 	- sess.run(init)
 	- sess.run(linear_model, {x:[1, 2, 3, 4]})
-	-> pošto je x tipa tf.placeholder, ovdje je bilo potrebno dodijeliti vriednosti za x
+	-> pošto je x tipa tf.placeholder, ovdje je bilo potrebno dodijeliti vrijednosti za x
 
 tf.train
 	- omogćuava treniranje nekih modela
 
 tf.contrib.learn
 	- omogućava treniranje, evaluaciju modela, rad sa skupovima podataka i slično
+	ESTIMATORS
+		- simple predefined models which can be used out of the box
+		- poput neuronske mreže koja klasificira, neuronske mreže koja služi za regresiju
+
+
+TENSORBOARD
+	- Alat za vizualiziranje TensorFlow grafova
+	- pošto su čvorovi jedan od glavnih struktura podataka u TensorFlowu, i pošto se duboke mreže, ali i neki standardni modeli strojnog učenja, poput logističke regresije, sastoje od velikog broja čvorova i varijabli, bitno nam je moći to vizualizirati radi lakšeg razumijevanja koda, odnosno onog što smo napisali
+	- kako bi se pokrenula vizualizacija nekog grafa pojedino je u čvorove tf.summary.* (* može predstavljati više stvari) spremiti ono što nas zanima te nakon toga predati neki tf.summary element, ili više njih, tako što ih se sjedini u jedan tf.summary čvor
+	- ti tf.summary čvorovi se zatim predaju tf.summary.FileWriter objektu koji uz tf.summary čvorove također uzima vrlo bitan argument, logdir, koji predstavlja direktorij gdje će se svi događaji zapisati.
+	- također, tf.summary.FileWriter objektu se može predati i graf kojeg će on vizualizirati
+
+	STAVIT NEKI JEDNOSTAVNI GRAF
+
+LOGGING
+	- Postupak treniranja se nadzire pomoću Monitor API-ja koji je ugrađen unutar paketa TensorFlow
+	- PET VRSTI DEBUG PORUKA
+		- DEBUG
+		- INFO
+		- WARN
+		- ERROR
+		- FATAL
+	- Većina tih poruka same za sebe govore što prikazuju prilikom izvođenja, INFO poruka nam prikazuje informacije o stanju modela prilikom treniranja.
+	- Predpostavljena vrsta debug poruke jest WARN
+
+	ValidationMonitor
+		- Logs a specified set of evaluation metrics at every n steps of training, and, if desired, implements early stopping under certain conditions
+		- može koristiti za kasniju vizualizaciju u TensorBoardu pošto se mogu spremiti podaci o točnosti i gubitku po koracima
+		- nadodatak na ovaj monitor jest razred MetricSpec
+			- sa njime možemo nadodati dodatne mjere prilikom računanja kvalitete pojedinih Modela poput preciznosti i odziv (precision and recall)
+			- 

@@ -1,1 +1,7 @@
 .ipynb_checkpoints
+iris_model/
+mnist_log/
+log_simple/
+MNIST_data/
+iris_test.csv
+iris_training.csv
