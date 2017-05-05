@@ -1,0 +1,13 @@
+
+- kao što je opisano u prethodnim poglavljima, duboke neuronske mreže, točnije konvolucijske neuronske mreže, su odličan alat za rješavanje mnogih problema računalnog vida, no još uvijek je velika nepoznanica način na koji one funkcioniraju
+- Dok je ideja generalno jasna, te postoji matematička podloga za rad konvolucijske mreže, nejasno je što se točno događa sa značajkama u pojedinim slojevima te kako one izgledaju
+- što se ide dublje i dublje u mrežu, značajke postaju sve veće razine
+- U prethodnim poglavljima je već spomenuto da se na početku izvlače rubovi i kutevi, dok daljnji slojevi izvlače već neke jasnije stvari poput samih objekata koje želimo rasaznati
+- ovdje je korisna vizualizacija mreže pošto možemo točno pogledati po pojedinim slojevima koje značajke su značajne za neki objekt te pojačati ih i zapravo vidjeti kako izgledaju te značajke
+
+OVO VEZANO UZ DEEP DREAM
+
+- Umjesto pojačavanja pojedinih značajki možemo pustiti mrežu da ona napravi tu odluku, i to na način da joj damo sliku na ulazu te odaberemo sloj za koji želimo da pojača ono što je u tom trenutku prepoznato
+	- na taj način bi raniji slojevi prepoznavali neke obrise objekata, rubove, kuteve i slične stvari
+	- dublji slojevi bi već bili precizniji te bi mogli prepoznati čak i neke objekte, koji zapravo ne trebaju biti uopće na slici, ali bi neke stvari na slici mogle pojačati aktivacije koje reagiraju na taj tip objekta
+- tehnika DeepDream nam zbog tih značajki daje uvid u level abstrakcije koje je pojedini sloj ostvario u razumijevanju slika
