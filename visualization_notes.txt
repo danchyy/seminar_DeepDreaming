@@ -1,3 +1,4 @@
+DEEP DREAM ČLANAK 
 
 - kao što je opisano u prethodnim poglavljima, duboke neuronske mreže, točnije konvolucijske neuronske mreže, su odličan alat za rješavanje mnogih problema računalnog vida, no još uvijek je velika nepoznanica način na koji one funkcioniraju
 - Dok je ideja generalno jasna, te postoji matematička podloga za rad konvolucijske mreže, nejasno je što se točno događa sa značajkama u pojedinim slojevima te kako one izgledaju
@@ -5,9 +6,27 @@
 - U prethodnim poglavljima je već spomenuto da se na početku izvlače rubovi i kutevi, dok daljnji slojevi izvlače već neke jasnije stvari poput samih objekata koje želimo rasaznati
 - ovdje je korisna vizualizacija mreže pošto možemo točno pogledati po pojedinim slojevima koje značajke su značajne za neki objekt te pojačati ih i zapravo vidjeti kako izgledaju te značajke
 
-OVO VEZANO UZ DEEP DREAM
+STRIKTNO DEEP DREAM
 
 - Umjesto pojačavanja pojedinih značajki možemo pustiti mrežu da ona napravi tu odluku, i to na način da joj damo sliku na ulazu te odaberemo sloj za koji želimo da pojača ono što je u tom trenutku prepoznato
 	- na taj način bi raniji slojevi prepoznavali neke obrise objekata, rubove, kuteve i slične stvari
 	- dublji slojevi bi već bili precizniji te bi mogli prepoznati čak i neke objekte, koji zapravo ne trebaju biti uopće na slici, ali bi neke stvari na slici mogle pojačati aktivacije koje reagiraju na taj tip objekta
 - tehnika DeepDream nam zbog tih značajki daje uvid u level abstrakcije koje je pojedini sloj ostvario u razumijevanju slika
+
+MREŽA NA KOJOJ ĆE BIT PRIKAZAN UČINAK DEEP DREAMA
+	INCEPTION MODULI
+		- u svkaom sloju postoje filtri veličine 1x1, 3x3 ili 5x5, uz njih se paralelno odvija operacija sažimanja
+		- konkatenacija svih filter je izlaz iz trenutnog sloja
+		- problem je što bi na ovaj način izlaz iz slojeva bio jednakih dimenzija kao prethodni sloj, što dovodi do velike komputacijske složenosti, tj. eksplozije
+		- to je rješeno uvođenjem dodatnih konvolucija prije računalno zahtjevnih operacija, dodaju se 1x1 konvolucije prije onih dimenzija 3 i 5
+		- ovakva struktura sloja omogućava povećavanje broja jedinki na svakoj razini bez računalne eksplozije, također intuitivno uvodi činjenicu da se vizualna informacija treba procesirati na raznim dimenzijama
+
+	- Manje konvolucijske mreže su dodanu kao izlaz Inception modula 4a i 4b, njihv gubitak pomnožen s nekom težinom se dodaju gubitku ukupne mreže, ti klasifikatori su maknuti kada se testira mreža
+
+	- stavit sliku cijelog modela
+
+VISUALIZING AND UNDERSTANDING NEURAL NETS
+	- neuronske mreže se dugo vremnea smatrajo kao crne kutijejer je teško razumijeti kako funkcioniraju zbog puno međusobno komunicirajućih nelinearnih dijelova
+	- duboke neuronske mreže je još teže razumijeti zato jer broje parametre u milijunima
+	- ŽELIMO RAZUMIJETI ŠTO SE DOGAĐA U SKRIVENIM SLOJEVIMA KAKO BISMO MOGLI UNAPRIJEDITI POSTOJEĆE ARHITEKTURE ILI STVORITI NOVE, BOLJE
+	- 
