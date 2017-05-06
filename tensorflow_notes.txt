@@ -1,5 +1,16 @@
 
-- srž programa Tensorflow se sastoji od komputacijskih grafova kojih se treba prvo izgraditi te nakon toga pokrenuti
+- TensorFlow je programski paket za primjenu algoritama strojnog učenja i dubokog učenja koji je izašao u uporabu tokom 2015. godine, dok je prvo stabilno izdanje izašlo u 2. mjesecu 2017. godine (dakle TensorFlow 1.0)
+- Autori TensorFlowa je tvrtka Google, točnije Google Brain Team
+- Danas se smatra jednim od najboljih, ako ne i najboljim paketom u području dubokog učenja
+- Prethodnik TensorFlowu je paket DistBelief koji je nastao u 2011. godini, no on je bio više usmjeren na razvoj unutar samog Google-a. 
+- Nadogradnjom te pojednostavljenjem nekih stvari unutar paketa DistBelief nastao je TensorFlow
+- srž programa TensorFlow se sastoji od komputacijskih grafova kojih se treba prvo izgraditi te nakon toga pokrenuti
+- ti grafovi su velika prednost pošto je moguće razbiti program na više jednostavnih dijelova te se na taj način olakšava debuggiranje i pronalazak pogrešaka
+- grafove je moguće vizualizirati pomoću TensorBoarda, koji puno olakšava u snalaženju s novim mrežama pošto se lijepo i jasno može vidjeti koja je arhitektura mreže
+- TensorBoard također omogućava odličan način vizualizacije performansi mreže tokom učenja
+- TensorFlow je moguće pokretati na više CPU i GPU uređaja, što je vrlo značajno, pošto učenje dubokih mreža na GPU uređajima znatno ubrzava taj proces
+- Također, TensorFlow je moguće pokretati na Linuxu, macOS te nekim mobilnim platformama poput Androida i iOS-a.
+- Trenutno postoji podrška za Python, C++, Haskell, Javu i Go
 - to se koristi pomoću tensorflowih ugrađenih varijabli i atributa, poput:
 	- tf.constant koja označava konstantu
 	- tf.Variable koja označava varijablu
@@ -65,4 +76,56 @@ LOGGING
 		- može koristiti za kasniju vizualizaciju u TensorBoardu pošto se mogu spremiti podaci o točnosti i gubitku po koracima
 		- nadodatak na ovaj monitor jest razred MetricSpec
 			- sa njime možemo nadodati dodatne mjere prilikom računanja kvalitete pojedinih Modela poput preciznosti i odziv (precision and recall)
-			- 
+
+
+Tensorflow - Goodfellow et al
+	- Izračun u TensorFlowu je opisan usmjerenim grafom koji se sastoji od skupa čvorova
+	- svaki taj čvor predstavlja jednu instancu operacije
+	- te operacije mogu biti razne stvari, poput običnog zbrajanja ili matričnog umnoška, unijet neke vrijednosti iz članka !!!!!!!!!
+	- vrijednosti s kojima se radi u TensorFlowu, dakle vrijednosti koje se kreću između pojedinih čvorova se zovu tenzori
+	- Tenzori su matrice proizvoljnih dimenzija gdje je vrsta elementa koje sadržavaju definirana ili se dodijeli prilikom izgradnje grafa
+	SESSION
+		- Programi vrše interakciju s TensorFlowovim sitemom tako što se kreira sesija (engl. Session)
+		- nad sesijom se može pozvati metoda run, koja u izlazni čvor računa ciljnu vrijednost komputacijskog grafa, prilikom poziva te metode može se dodijeliti vrijednostim nekim varijablama koje su naznačene na taj način (engl. placeholder)
+	VARIABLES
+		- ovdje varijable imaju isto značenje kao u svim ostalim programskim jezicima i paketima, to su operacije koje sadržavaju promjenjivi tenzor koji se mijenja kroz operacije
+	IMPLEMENTACIJA
+		- glavne komponente u TensorFlow sistemu su klijent (engl. client), kojeg sesija koristi za komunikaciju s glavnim procesom (engl. master) i jednim ili više radnicima (engl. worker processes), svaki radnik je zadžen za dodjelu pristupa jednom ili više uređaja (CPU, GPU)
+		- postoji lokalna i raspodjeljena implementacija TensorFlowa
+			- lokalna ima sve 3 komponente u jednom računalu
+			- raspodjeljena može imati sve 3 komponente na različitim uređajim
+
+	RAČUNANJE GRADIJENTA
+		- jedna vrlo zgodna i praktična stvar prilikom rada s algoritmima strojnog i dubokog učenja jest ugrađena podrška za automatsko računanje gradijenta
+		- za svaki tenzor postoji ugrađne funkcija gradijenta te se uvijek može dobiti gradijent izlaznog čvora u ovisnosti o svim prethodnima
+		- krenuvši od posljednjeg čvora za svaki se čvor računa parcijalna derivacija u ovisnosti o prethodnom čvoru te se pomoću pravila ulančavanja izgrađuje ukupni rezultat
+
+	TENSORBOARD
+		- mnogi modeli komputacijskih grafova vezanih uz konvolucijske neuronske mreže su vrlo složeni te znaju imati više od 10 000 čvorova, već spomenuti Inception model ima ukupno 36000 čvorova
+		- vizualizacija je omogućena tako da se čvorovi grupiraju u blokove više razine te označe one čvorove koji imaju istu strukturu
+		- TensorBoard omogućava vizualizaciju tako označenog čvora te dozvoljava odabir i detaljniji uvid u pojedine čvorove
+
+		- Uz vizualizaciju samog modela, TensorBoard također dozvoljava vizualizaciju stanja unutar modela, npr. vrijednost funkcije gubitka, distribucija težina u neuronskoj mreži, vizualizacija filtera naučenih unutar konvolucijske neuronske mreže
+		- to je omogućeno tako da se postavi nadgledanje nad varijablama koje nas zanimaju i u nekim trenutcima tijekom treniranja izvršavaju se ti dodatni čvorovi zaduženi za nadgledanje koji spremaju rezultate u neki posebni direktorij 
+
+A TOUR OF TENSORFLOW
+	- Računalni graf gdje su čvorovi operacije, a bridovi predstavljaju podatke koji teku između čvorova
+	OPERACIJE
+		- operacija može imati nula ili više ulaza te nula ili više izlaza, te na taj način može predstavljati i samo neku konstantu ili varijablu
+		- npr. konstanta je operacija koja prima 0 ili više ulaza te 
+	TENZORI
+		- tenzori su višedimenzionalne kolekcije homogenih vrijednosti nekog tipa
+		- svaki tenzor ima svoj rank, koji predstavlja dimenziju tenzora
+		- Oblik (engl. shape) tenzora predstavlja tuple koji opisuje broj komponenti u svakoj dimenziji
+		- npr. vektori su ranga 1, skalari su tenzori ranga 0
+		- sami tenzori ne drže vrijednosti u svojoj memoriji već pružaju sučelje za dohvat vrijednosti koje referencira taj tenzor
+
+	VARIJABLE
+		- no mnogo tenzora je uništeno u samo jednom prolazu gradijentnog spusta pa se zbog toga uvode Varijable
+		- to su operacije koje pamte tenzore te na taj način dozvoljavaju promjenu vrijednosti unutar tenzora 
+
+	SESIJE
+		- U TensorFlou izvršavanje operacije nad tenzorima se mogu izvršiti samo unutar posebnog okruženja, odnosno sesije (engl. Session)
+		- sesije se brinu za alokaciju i održavanje varijabla
+		- metoda run izvršava radnje nad komputacijskim grafovima, ta metoda kao ulaz prima čvorove u grafu čije tenzore je potrebno izračunati
+	

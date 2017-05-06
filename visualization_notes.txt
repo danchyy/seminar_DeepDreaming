@@ -1,3 +1,10 @@
+WIKIPEDIA DEEP DREAM
+	- Slika se provodi kroz neuronsku mrežu sve do nekog sloja gdje je određeno da postupak stane i tada se neuroni aktiviraju za svoje značajke, ovisno o slici, neki neuroni će se aktivirati jače, a neki slabije
+	- postupak je sličan backpropagationu (prostiranju unazad) no umjesto da se podešavaju težine, podešava se ulazna slika, a težine ostaju fiksne
+	UPORABA
+		- Glavna uporaba postupka DeepDream je pronalazak uporabe pojedinih skrivenih slojeva, ovim postupkom se može uvidjeti koji skriveni sloj je zadužen za pronalazak pojedinih značajki
+		- također u nekim radovima je predloženo da slike nastale DeepDream generiranjem mogu poboljšati treniranje mreža
+
 DEEP DREAM ČLANAK 
 
 - kao što je opisano u prethodnim poglavljima, duboke neuronske mreže, točnije konvolucijske neuronske mreže, su odličan alat za rješavanje mnogih problema računalnog vida, no još uvijek je velika nepoznanica način na koji one funkcioniraju
