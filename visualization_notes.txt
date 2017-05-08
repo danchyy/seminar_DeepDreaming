@@ -20,6 +20,21 @@ STRIKTNO DEEP DREAM
 	- dublji slojevi bi već bili precizniji te bi mogli prepoznati čak i neke objekte, koji zapravo ne trebaju biti uopće na slici, ali bi neke stvari na slici mogle pojačati aktivacije koje reagiraju na taj tip objekta
 - tehnika DeepDream nam zbog tih značajki daje uvid u level abstrakcije koje je pojedini sloj ostvario u razumijevanju slika
 
+CS231n
+- make_step (render_deepdream) se poziva prilikom svakega koraka, i dajemo na kojem sloju želimo sanjat
+- napravimo forward na mreži, zatim pozovemo objective na sloju gdje želimo
+- proslijedimo slike do nekog sloja, zatim gradijent postaje aktivacija tih neurona u tom sloju
+- aktivacije su ReLU aktivacije
+- DeepDream pojačava značajke koje neuronska mreža misli da su značajne
+- Pokušavamo pojačati dio slike koji je najviše utjecao na razniu značajki u nekom sloju
+- i stalno pokušavamo pojačavati taj dio slike jer je neuronska mreža mislila da se ondje nalazi neki objekt
+- u dubljim slojevima se ističu neki objekti, dok su na nižim slojevima pronađeni neki od običnih oblika poput tekstura, rubova i slično
+- Optimizacijski proces preko slike, želimo ostvariti neki gubitak
+
+- Pozivamo objective nad slojom gdje želimo sanjat, postavljamo gradijente tako da budu jednake aktivacijama (to je objective), I zatim napravimo backprogataion natrag do slike
+
+- Pojačavamo značajke koje su maksimalno aktivirane u tom sloju
+
 MREŽA NA KOJOJ ĆE BIT PRIKAZAN UČINAK DEEP DREAMA
 	INCEPTION MODULI
 		- u svkaom sloju postoje filtri veličine 1x1, 3x3 ili 5x5, uz njih se paralelno odvija operacija sažimanja
@@ -36,4 +51,6 @@ VISUALIZING AND UNDERSTANDING NEURAL NETS
 	- neuronske mreže se dugo vremnea smatrajo kao crne kutijejer je teško razumijeti kako funkcioniraju zbog puno međusobno komunicirajućih nelinearnih dijelova
 	- duboke neuronske mreže je još teže razumijeti zato jer broje parametre u milijunima
 	- ŽELIMO RAZUMIJETI ŠTO SE DOGAĐA U SKRIVENIM SLOJEVIMA KAKO BISMO MOGLI UNAPRIJEDITI POSTOJEĆE ARHITEKTURE ILI STVORITI NOVE, BOLJE
-	- 
+
+LOKACIJA SLIKE:
+	- https://pixabay.com/en/sky-clouds-blue-white-pattern-1572191/
